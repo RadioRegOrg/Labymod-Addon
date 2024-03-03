@@ -1,0 +1,55 @@
+{
+  "radioreg": {
+    "settings": {
+      "name": "Radio Player",
+      "enabled": {
+        "name": "Enabled"
+      },
+      "radioDropdown": {
+        "name": "Radio Station"
+      },
+      "toggleKey": {
+        "name": "Toggle Key"
+      },
+      "pauseKey": {
+        "name": "Pause Key"
+      },
+      "playKey": {
+        "name": "Play Key"
+      },
+      "volumeSlider": {
+        "name": "Stream volume"
+      },
+      "stationList": {
+        "name": "Radio List"
+      },
+      "header": {
+        "keys": {
+          "name": "Keys"
+        }
+      }
+    },
+    "hudWidget": {
+      "stream_track": {
+        "name": "Stream Track",
+        "showCover": {
+          "name": "Show Cover"
+        }
+      }
+    },
+    "notification": {
+      "alreadyPlaying": {
+        "name": "Already Playing",
+        "description": "You are already listening to %s"
+      },
+      "notSelected": {
+        "name": "No radio stream selected",
+        "description": "You have not selected a radio stream, please select in settings"
+      },
+      "playing": {
+        "name": "Playing Radio",
+        "description": "You are now listening to %s"
+      }
+    }
+  }
+}

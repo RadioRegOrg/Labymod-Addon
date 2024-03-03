@@ -1,0 +1,9 @@
+@import super();
+
+Ingame {
+  border-radius: 5;
+
+  .cover {
+    border-radius: 5;
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "radioreg": {
+    "settings": {
+      "name": "Radio Player",
+      "enabled": {
+        "name": "Eingeschaltet"
+      },
+      "radioDropdown": {
+        "name": "Radio Sender"
+      },
+      "toggleKey": {
+        "name": "Umschalt Taste"
+      },
+      "pauseKey": {
+        "name": "Pausen Taste"
+      },
+      "playKey": {
+        "name": "Play Taste"
+      },
+      "volumeSlider": {
+        "name": "Lautstärke"
+      },
+      "stationList": {
+        "name": "Sender Liste"
+      },
+      "header": {
+        "keys": {
+          "name": "Tasten"
+        }
+      }
+    },
+    "hudWidget": {
+      "stream_track": {
+        "name": "Stream Track",
+        "showCover": {
+          "name": "Cover anzeigen"
+        }
+      }
+    },
+    "notification": {
+      "alreadyPlaying": {
+        "name": "Es wird bereits gespielt",
+        "description": "Sie hören bereits %s"
+      },
+      "notSelected": {
+        "name": "Keine Radio Stream ausgewählt",
+        "description": "Sie haben keinen Radio Stream ausgewählt, bitte in den Einstellungen auswählen"
+      },
+      "playing": {
+        "name": "Radio Stream wird abgespielt",
+        "description": "Sie hören nun %s"
+      }
+    }
+  }
+}

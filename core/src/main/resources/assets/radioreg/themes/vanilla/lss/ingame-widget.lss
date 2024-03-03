@@ -1,0 +1,96 @@
+Ingame {
+  top: 0;
+  left: 0;
+  height: 30;
+  padding: 2;
+  min-width: 170;
+  width: fit-content;
+  max-width: 400;
+  orientation: horizontal;
+
+  .player {
+    height: 100%;
+    orientation: vertical;
+    width: 136;
+    padding-left: 2;
+    padding-right: 2;
+
+    .text-content {
+      height: 100%;
+      orientation: horizontal;
+      space-between-entries: 2;
+
+      .text {
+        height: fit-content;
+        margin-top: 0;
+
+        Component {
+          left: 0;
+          top: 0;
+          padding-left: 3;
+          padding-right: 3;
+          max-lines: 1;
+          overflow-strategy: clip;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .track-name {
+    font-size: 1 !important;
+  }
+
+  .station-name, .artist-name {
+    visible: true;
+    font-size: 0.8;
+  }
+
+  &.no-station {
+    font-size: 1 !important;
+
+    .text {
+      margin-top: 5;
+    }
+
+    .station-name {
+      visible: false;
+    }
+
+    .artist-name {
+      font-size: 0.9;
+    }
+  }
+
+  .cover {
+    width: 30;
+    height: 30;
+    right: 0;
+    top: 2;
+    visible: true;
+  }
+
+  &.no-cover {
+    max-width: 140;
+
+    .cover {
+      visible: false;
+    }
+  }
+
+  &.right {
+    .text {
+      Component {
+        alignment-x: right;
+      }
+    }
+  }
+
+  &.left {
+    .text {
+      Component {
+        alignment-x: left;
+      }
+    }
+  }
+}
