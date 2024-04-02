@@ -17,6 +17,7 @@ dependencies {
     maven(mavenCentral(), "com.googlecode.soundlibs:mp3spi:1.9.5.4")
     maven(mavenCentral(), "com.googlecode.soundlibs:jlayer:1.0.1.4")
     maven(mavenCentral(), "com.googlecode.soundlibs:tritonus-share:0.3.7.4")
+    maven(mavenCentral(), "io.socket:socket.io-client:2.1.0")
 }
 
 labyModProcessor {

@@ -8,8 +8,8 @@ import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 
 public class Request {
-  private static final String protocol = "https";
-  private static final String apiAddress = "api.radioreg.net";
+  private static final String protocol = "http";
+  private static final String apiAddress = "localhost:3000/api";
 
   public static Stream[] getStreams() {
     return sendGet("stream", Stream[].class);

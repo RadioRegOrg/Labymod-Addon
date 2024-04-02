@@ -1,6 +1,5 @@
 package de.optischa.radioPlayer.widget;
 
-import de.optischa.radioPlayer.Main;
 import de.optischa.radioPlayer.player.gson.Stream;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.gui.icon.Icon;
@@ -8,6 +7,7 @@ import net.labymod.api.client.gui.lss.property.annotation.AutoWidget;
 import net.labymod.api.client.gui.screen.Parent;
 import net.labymod.api.client.gui.screen.widget.SimpleWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.ComponentWidget;
+import net.labymod.api.client.gui.screen.widget.widgets.layout.FlexibleContentWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.renderer.IconWidget;
 
 @AutoWidget
@@ -20,21 +20,31 @@ public class StationWidget extends SimpleWidget {
   public void initialize(Parent parent) {
     super.initialize(parent);
 
-    IconWidget backgroundIcon = new IconWidget(this.getIconWidget(this.stream.thumbnail));
-    backgroundIcon.addId("background-cover");
-    this.addChild(backgroundIcon);
+    FlexibleContentWidget itemContainerWidget = new FlexibleContentWidget();
+    itemContainerWidget.addId("item-container");
 
-    IconWidget iconWidget = new IconWidget(this.getIconWidget(this.stream.cover));
+    IconWidget iconWidget = new IconWidget(this.getIconWidget(this.stream.song.cover));
     iconWidget.addId("avatar");
-    this.addChild(iconWidget);
+    itemContainerWidget.addContent(iconWidget);
+
+    FlexibleContentWidget itemTextContainerWidget = new FlexibleContentWidget();
+    itemTextContainerWidget.addId("item-text-container");
 
     ComponentWidget nameWidget = ComponentWidget.component(Component.text(this.stream.name));
     nameWidget.addId("name");
-    this.addChild(nameWidget);
+    itemTextContainerWidget.addContent(nameWidget);
 
-    ComponentWidget customNameWidget = ComponentWidget.component(Component.text(this.stream.title + " - " + this.stream.artist));
-    customNameWidget.addId("song");
-    this.addChild(customNameWidget);
+    ComponentWidget titleWidget = ComponentWidget.component(Component.text(this.stream.song.title != null ? this.stream.song.title : ""));
+    titleWidget.addId("title");
+    itemTextContainerWidget.addContent(titleWidget);
+
+    ComponentWidget artistWidget = ComponentWidget.component(Component.text(this.stream.song.artist != null ? this.stream.song.artist : ""));
+    artistWidget.addId("artist");
+    itemTextContainerWidget.addContent(artistWidget);
+
+    itemContainerWidget.addContent(itemTextContainerWidget);
+
+    this.addChild(itemContainerWidget);
   }
 
   public Stream getStream() {

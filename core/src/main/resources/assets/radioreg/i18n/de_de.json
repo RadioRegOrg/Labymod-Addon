@@ -1,5 +1,9 @@
 {
   "radioreg": {
+    "navigation": {
+      "title": "Radio Player",
+      "station-menu": "Sender Liste"
+    },
     "settings": {
       "name": "Radio Player",
       "enabled": {

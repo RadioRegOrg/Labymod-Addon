@@ -1,12 +1,9 @@
 package de.optischa.radioPlayer;
 
-import de.optischa.radioPlayer.activity.StationsActivity;
 import de.optischa.radioPlayer.player.MusicPlayer;
 import de.optischa.radioPlayer.player.gson.Stream;
 import net.labymod.api.addon.AddonConfig;
-import net.labymod.api.client.gui.screen.activity.Activity;
 import net.labymod.api.client.gui.screen.key.Key;
-import net.labymod.api.client.gui.screen.widget.widgets.activity.settings.ActivitySettingWidget.ActivitySetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.KeybindWidget.KeyBindSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SliderWidget.SliderSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
@@ -14,7 +11,6 @@ import net.labymod.api.configuration.loader.annotation.ConfigName;
 import net.labymod.api.configuration.loader.annotation.Exclude;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
 import net.labymod.api.configuration.settings.annotation.SettingSection;
-import net.labymod.api.util.MethodOrder;
 
 @SuppressWarnings("FieldMayBeFinal")
 @ConfigName("settings")
@@ -63,7 +59,7 @@ public class Configuration extends AddonConfig {
   private ConfigProperty<Key> playKey = new ConfigProperty<>(Key.NONE);
 
   @Exclude
-  private Stream selectedStream = new Stream(0, "Default","Unknown", "Unknown", "Unknown", "https://cdn.breathfm.de/covers/no-cover.jpg", "https://cdn.breathfm.de/covers/no-cover.jpg");
+  private Stream selectedStream = new Stream(0, "Default","Unknown", null);
 
   public ConfigProperty<Key> toggleKey() {
     return this.toggleKey;
@@ -92,11 +88,5 @@ public class Configuration extends AddonConfig {
   @Override
   public ConfigProperty<Boolean> enabled() {
     return this.enabled;
-  }
-
-  @MethodOrder(before = "volumeSlider")
-  @ActivitySetting
-  public Activity stationList() {
-    return new StationsActivity();
   }
 }
