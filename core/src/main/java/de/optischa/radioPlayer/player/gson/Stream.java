@@ -4,9 +4,10 @@ public class Stream {
   public Stream() {
   }
 
-  public Stream(int id, String name, String artist, Song song) {
+  public Stream(int id, String name, String url, Song song) {
     this.id = id;
     this.name = name;
+    this.url = url;
     this.song = song;
   }
 

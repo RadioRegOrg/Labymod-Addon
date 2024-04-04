@@ -28,8 +28,10 @@ public class Configuration extends AddonConfig {
           return;
         }
         if (newValue) {
+          main.getWebsocket().connect();
           musicPlayer.play(this.selectedStream());
         } else {
+          main.getWebsocket().disconnect();
           musicPlayer.stop();
         }
       });
@@ -59,7 +61,7 @@ public class Configuration extends AddonConfig {
   private ConfigProperty<Key> playKey = new ConfigProperty<>(Key.NONE);
 
   @Exclude
-  private Stream selectedStream = new Stream(0, "Default","Unknown", null);
+  private Stream selectedStream = new Stream(0, "Default", "",null);
 
   public ConfigProperty<Key> toggleKey() {
     return this.toggleKey;

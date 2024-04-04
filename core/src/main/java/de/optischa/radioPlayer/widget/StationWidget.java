@@ -9,6 +9,7 @@ import net.labymod.api.client.gui.screen.widget.SimpleWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.ComponentWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.FlexibleContentWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.renderer.IconWidget;
+import net.labymod.api.client.resources.ResourceLocation;
 
 @AutoWidget
 public class StationWidget extends SimpleWidget {
@@ -52,6 +53,10 @@ public class StationWidget extends SimpleWidget {
   }
 
   public Icon getIconWidget(String url) {
-    return Icon.url(url);
+    if(url == null) {
+      return Icon.texture(ResourceLocation.create("radioreg", "textures/icon.png"));
+    } else {
+      return Icon.url(url);
+    }
   }
 }
