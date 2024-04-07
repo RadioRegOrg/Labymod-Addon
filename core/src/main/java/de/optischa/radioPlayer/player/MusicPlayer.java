@@ -127,6 +127,7 @@ public class MusicPlayer {
       URL url = new URL(stream.url);
       URLConnection connection = url.openConnection();
       connection.setRequestProperty("User-Agent", "RadioReg/Labymod");
+      connection.setConnectTimeout(1000);
 
       queue.offer(() -> {
         try {

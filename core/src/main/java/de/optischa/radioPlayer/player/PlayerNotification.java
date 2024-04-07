@@ -56,5 +56,4 @@ public class PlayerNotification {
     notification.type(Type.SYSTEM);
     return notification.build();
   }
-
 }

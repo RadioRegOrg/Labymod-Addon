@@ -40,7 +40,7 @@ public class Main extends LabyAddon<Configuration> {
     this.stationsActivity = new StationsActivity();
     this.mainActivity = new MainActivity();
 
-    this.websocket = new Websocket(this.logger(), "http://localhost:3001/labymod");
+    this.websocket = new Websocket(this.logger(), "https://ws.radioreg.net/labymod");
 
     HudWidgetRegistry registry = this.labyAPI().hudWidgetRegistry();
     registry.register(new RadioPlayerHudWidget("stream_track"));
