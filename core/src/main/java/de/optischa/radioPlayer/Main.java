@@ -7,7 +7,6 @@ import de.optischa.radioPlayer.hudwidgets.RadioPlayerHudWidget;
 import de.optischa.radioPlayer.listener.HotkeyListener;
 import de.optischa.radioPlayer.player.MusicPlayer;
 import de.optischa.radioPlayer.player.Websocket;
-import de.optischa.radioPlayer.player.basic.BasicPlayer;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.gui.hud.HudWidgetRegistry;
 import net.labymod.api.models.addon.annotation.AddonMain;
@@ -33,9 +32,7 @@ public class Main extends LabyAddon<Configuration> {
   protected void enable() {
     this.registerSettingCategory();
 
-    BasicPlayer basicPlayer = new BasicPlayer();
-
-    this.musicPlayer = new MusicPlayer(basicPlayer, this.logger());
+    this.musicPlayer = new MusicPlayer(this.logger());
 
     this.stationsActivity = new StationsActivity();
     this.mainActivity = new MainActivity();

@@ -15,22 +15,21 @@ import java.util.concurrent.LinkedBlockingQueue;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.util.logging.Logging;
 
-public class MusicPlayer {
+public class MusicPlayer extends BasicPlayer {
 
   private final Main addon;
   private final BlockingQueue<Runnable> queue;
-  private final BasicPlayer basicPlayer;
   private double currentVolume;
   private Stream currentStream;
   private final Logging logger;
   public Stream[] streams;
 
-  public MusicPlayer(BasicPlayer basicPlayer, Logging logger) {
+
+  public MusicPlayer(Logging logger) {
     this.logger = logger;
     this.addon = Main.get();
 
     this.queue = new LinkedBlockingQueue<>();
-    this.basicPlayer = basicPlayer;
     Thread playerThread = new Thread(() -> {
       while (true) {
         try {
@@ -55,6 +54,8 @@ public class MusicPlayer {
     List<Stream> streams1 = Arrays.stream(streams).filter(stream -> stream.id == this.addon.configuration().selectedStream().id).toList();
     if(streams1.isEmpty())
       return;
+    if(currentStreamRequest.song == null || currentStreamRequest.song.artist == null || currentStreamRequest.song.title == null)
+      return;
     if (currentStreamRequest.song.artist.equalsIgnoreCase(streams1.get(0).song.artist)
         && currentStreamRequest.song.title.equalsIgnoreCase(streams1.get(0).song.title)) {
       return;
@@ -76,16 +77,16 @@ public class MusicPlayer {
       return;
     }
     try {
-      basicPlayer.stop();
+      super.stop();
       play(stream);
-      basicPlayer.resume();
+      super.resume();
     } catch (BasicPlayerException e) {
       logger.warn("Failed to resume the player", e);
     }
   }
 
   public boolean isPlaying() {
-    return basicPlayer.getStatus() == BasicPlayer.PLAYING;
+    return super.getStatus() == BasicPlayer.PLAYING;
   }
 
   public void setVolume(float volume) {
@@ -94,7 +95,7 @@ public class MusicPlayer {
     }
     this.currentVolume = volume;
     try {
-      basicPlayer.setGain(volume);
+      super.setGain(volume);
     } catch (BasicPlayerException e) {
       logger.warn("Failed to set the volume", e);
     }
@@ -119,7 +120,7 @@ public class MusicPlayer {
 
     try {
       if (isPlaying()) {
-        this.stop();
+        super.stop();
       }
 
       this.checkVolume();
@@ -131,9 +132,9 @@ public class MusicPlayer {
 
       queue.offer(() -> {
         try {
-          this.basicPlayer.open(connection.getInputStream());
-          this.basicPlayer.play();
-          basicPlayer.setGain(this.currentVolume);
+          super.open(connection.getInputStream());
+          super.play();
+          super.setGain(this.currentVolume);
           currentStream = stream;
           this.addon.labyAPI().notificationController().push(
               PlayerNotification.sendInfoNotification("radioreg.notification.playing.name",
@@ -154,7 +155,7 @@ public class MusicPlayer {
   public void pause() {
     queue.offer(() -> {
       try {
-        basicPlayer.stop();
+        super.stop();
       } catch (BasicPlayerException e) {
         logger.error("Failed to stop the player", e);
       }
@@ -164,11 +165,11 @@ public class MusicPlayer {
   public void toggle() {
     queue.offer(() -> {
       try {
-        if (basicPlayer.getStatus() == BasicPlayer.PAUSED
-            || basicPlayer.getStatus() == BasicPlayer.STOPPED) {
-          basicPlayer.resume();
-        } else if (basicPlayer.getStatus() == BasicPlayer.PLAYING) {
-          basicPlayer.pause();
+        if (super.getStatus() == BasicPlayer.PAUSED
+            || super.getStatus() == BasicPlayer.STOPPED) {
+          super.resume();
+        } else if (super.getStatus() == BasicPlayer.PLAYING) {
+          super.pause();
         }
       } catch (BasicPlayerException e) {
         logger.error("Failed to toggle the player", e);
@@ -179,7 +180,7 @@ public class MusicPlayer {
   public void stop() {
     queue.offer(() -> {
       try {
-        this.basicPlayer.stop();
+        super.stop();
       } catch (BasicPlayerException e) {
         logger.error("Failed to stop the player", e);
       }

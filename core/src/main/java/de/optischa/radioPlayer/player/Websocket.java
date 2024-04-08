@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Websocket {
+
   private final Logging logger;
   private Socket socket;
 
@@ -29,7 +30,7 @@ public class Websocket {
     try {
       this.socket = IO.socket(serverUrl, options);
     } catch (URISyntaxException e) {
-        this.logger.error("Fehler beim Socket erstellen");
+      this.logger.error("Fehler beim Socket erstellen");
     }
 
     this.logger.info("Initialisierung vom Websocket Abgeschlossen");
@@ -37,19 +38,23 @@ public class Websocket {
     this.onEvent("connect", objects -> {
       this.logger.info("Verbindung zum Websocket hergestellt");
 
-      Main.get().getWebsocket().onEvent("all_stations", objects1 -> Main.get().musicPlayer.streams = new Gson().fromJson(Arrays.stream(objects1).toList().get(0).toString(), Stream[].class));
+      Main.get().getWebsocket().onEvent("all_stations",
+          objects1 -> Main.get().musicPlayer.streams = new Gson().fromJson(
+              Arrays.stream(objects1).toList().get(0).toString(), Stream[].class));
 
       Main.get().getWebsocket().onEvent("station_stream_content_update", objects1 -> {
-        UpdateStream updateStream =  new Gson().fromJson(Arrays.stream(objects1).toList().get(0).toString(), UpdateStream.class);
+        UpdateStream updateStream = new Gson().fromJson(
+            Arrays.stream(objects1).toList().get(0).toString(), UpdateStream.class);
 
         List<Stream> newStreams = new ArrayList<>();
 
         Arrays.stream(Main.get().musicPlayer.streams).toList().forEach(stream -> {
-          if(stream.id == updateStream.id) {
-            Stream newStream = new Stream(stream.id, stream.name, stream.url, new Song(updateStream.title, updateStream.artist, updateStream.cover));
+          if (stream.id == updateStream.id) {
+            Stream newStream = new Stream(stream.id, stream.name, stream.url,
+                new Song(updateStream.title, updateStream.artist, updateStream.cover));
             newStreams.add(newStream);
 
-            if(Main.get().musicPlayer.isPlaying()) {
+            if (Main.get().musicPlayer.isPlaying()) {
               if (updateStream.id == Main.get().configuration().selectedStream().id) {
                 Main.get().configuration().setSelectedStream(newStream);
                 Main.get().labyAPI().eventBus().fire(new StreamChangeTrackEvent(newStream));
