@@ -33,8 +33,26 @@
         }
       }
     },
+    "activity": {
+      "textfield": {
+        "search": "Suche eine Radio Sender"
+      },
+      "stationslist": {
+        "search": {
+          "noSearch": "Keine Sender gefunden",
+          "noFilter": "Keine Filter",
+          "noIndex": "Keine Sender geladen"
+        }
+      }
+    },
     "hudWidget": {
       "stream_track": {
+        "showStation": {
+          "name": "Sendernamen Anzeigen"
+        },
+        "backgroundColor": {
+          "name": "Hintergrundfarbe ändern"
+        },
         "name": "Stream Track",
         "showCover": {
           "name": "Cover anzeigen"

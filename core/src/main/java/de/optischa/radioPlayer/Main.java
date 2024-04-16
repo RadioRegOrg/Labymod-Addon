@@ -5,6 +5,7 @@ import de.optischa.radioPlayer.activity.StationsActivity;
 import de.optischa.radioPlayer.activity.navigation.StationsNavigationElement;
 import de.optischa.radioPlayer.hudwidgets.RadioPlayerHudWidget;
 import de.optischa.radioPlayer.listener.HotkeyListener;
+import de.optischa.radioPlayer.listener.StreamUpdateListener;
 import de.optischa.radioPlayer.player.MusicPlayer;
 import de.optischa.radioPlayer.player.Websocket;
 import net.labymod.api.addon.LabyAddon;
@@ -37,12 +38,13 @@ public class Main extends LabyAddon<Configuration> {
     this.stationsActivity = new StationsActivity();
     this.mainActivity = new MainActivity();
 
-    this.websocket = new Websocket(this.logger(), "https://ws.radioreg.net/labymod");
+    this.websocket = new Websocket(this.logger(), "http://localhost:3002/labymod");
 
     HudWidgetRegistry registry = this.labyAPI().hudWidgetRegistry();
     registry.register(new RadioPlayerHudWidget("stream_track"));
 
     this.registerListener(new HotkeyListener());
+    this.registerListener(new StreamUpdateListener());
 
     labyAPI().navigationService().register("radioreg_main_ui", new StationsNavigationElement(this));
 

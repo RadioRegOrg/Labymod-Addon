@@ -61,7 +61,7 @@ public class Configuration extends AddonConfig {
   private ConfigProperty<Key> playKey = new ConfigProperty<>(Key.NONE);
 
   @Exclude
-  private Stream selectedStream = new Stream(0, "Default", "",null);
+  private Stream selectedStream = new Stream(0, "Default", "",null, null);
 
   public ConfigProperty<Key> toggleKey() {
     return this.toggleKey;

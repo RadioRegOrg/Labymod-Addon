@@ -1,27 +1,31 @@
 {
   "radioreg": {
+    "navigation": {
+      "title": "Radio Player",
+      "station-menu": "Sender Liste"
+    },
     "settings": {
       "name": "Radio Player",
       "enabled": {
-        "name": "Enabled"
+        "name": "Activated"
       },
       "radioDropdown": {
-        "name": "Radio Station"
+        "name": "Radio station"
       },
       "toggleKey": {
-        "name": "Toggle Key"
+        "name": "Toggle button"
       },
       "pauseKey": {
-        "name": "Pause Key"
+        "name": "Pause button"
       },
       "playKey": {
-        "name": "Play Key"
+        "name": "Play button"
       },
       "volumeSlider": {
-        "name": "Stream volume"
+        "name": "Volume"
       },
       "stationList": {
-        "name": "Radio List"
+        "name": "Station list"
       },
       "header": {
         "keys": {
@@ -31,24 +35,42 @@
     },
     "hudWidget": {
       "stream_track": {
+        "showStation": {
+          "name": "Display station names"
+        },
+        "backgroundColor": {
+          "name": "Change background color"
+        },
         "name": "Stream Track",
         "showCover": {
-          "name": "Show Cover"
+          "name": "Show cover"
+        }
+      }
+    },
+    "activity": {
+      "textfield": {
+        "search": "Search for a radio station"
+      },
+      "stationslist": {
+        "search": {
+          "noSearch": "No Station's found",
+          "noFilter": "No Filter",
+          "noIndex": "No stations loaded"
         }
       }
     },
     "notification": {
       "alreadyPlaying": {
-        "name": "Already Playing",
+        "name": "It is already being played",
         "description": "You are already listening to %s"
       },
       "notSelected": {
         "name": "No radio stream selected",
-        "description": "You have not selected a radio stream, please select in settings"
+        "description": "You have not selected a radio stream, please select it in the settings"
       },
       "playing": {
-        "name": "Playing Radio",
-        "description": "You are now listening to %s"
+        "name": "Radio stream is played",
+        "description": "You will now listen to %s"
       }
     }
   }

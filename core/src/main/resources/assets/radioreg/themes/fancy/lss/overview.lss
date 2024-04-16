@@ -38,26 +38,64 @@
     width: 100%;
     use-floating-point-position: true;
   }
+}
+
+.error {
+  left: 50%;
+  top: 75;
+  alignment-x: center;
+  font-size: medium;
+  text-color: red;
+}
+
+.scroll {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  scroll-speed: 61;
+  modify-content-width: true;
+  padding-bottom: 10;
+}
 
   TilesGrid {
     use-floating-point-position: true;
     width: 100%;
+    margin: 5 0;
     height: fit-content;
-    tile-height: 150;
+    tile-height: 55;
     space-between-entries: 5;
-    tiles-per-line: 4;
-  }
+    tiles-per-line: 2;
 
   Station {
     border-color: rgba(255,255,255,50);
     border-thickness: 0;
     background-color-transition-duration: 150;
     renderer: Background;
-    width: 75;
-    height: 125;
+    width: 175;
+    height: 52;
     stencil: true;
     border-radius: 5;
     use-floating-point-position: true;
+
+    &:active {
+      border-radius: 5;
+      padding: 2;
+      border-color: var(--button-color-border);
+      border-thickness: 1.5;
+      background-color: var(--button-color);
+    }
+
+    .play-button, .pause-button {
+      width: 15;
+      height: 15;
+      background-color: #1e2129;
+      padding: 1;
+      border-radius: 5;
+      cursor: pointer;
+      top: 32;
+      left: 1;
+    }
 
     .item-container {
       left: 0;
@@ -66,27 +104,36 @@
       top: 0;
       width: 100%;
       height: fit-content;
-      orientation: vertical;
+      orientation: horizontal;
 
       .avatar {
+        margin-top: 1;
         border-radius: 5;
-        width: 75;
-        height: 75;
+        width: 50;
+        height: 50;
       }
 
       .item-text-container {
-        height: 50;
+        height: 57;
+        margin-left: 2;
+        margin-top: 1;
         width: 100%;
         top: 0;
         left: 0;
 
         .name {
-          font-size: 0.9;
-          font-weight: 700;
+          font-size: 1;
+          font-weight: 500;
           max-width: 100%;
           use-floating-point-position: true;
-          margin: 5 0 5 0;
+          margin-top: 3;
           max-lines: 1;
+        }
+
+        .organization {
+          text-color: gold;
+          font-size: 0.7;
+          margin-bottom: 7;
         }
 
         .title {
@@ -101,10 +148,10 @@
            use-floating-point-position: true;
           font-style: italic;
           max-width: 100%;
-          font-size: 0.70;
+          font-size: 0.8;
           max-lines: 1;
         }
       }
+      }
     }
   }
-}

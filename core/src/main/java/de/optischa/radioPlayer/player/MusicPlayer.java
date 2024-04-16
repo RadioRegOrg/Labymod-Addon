@@ -51,17 +51,21 @@ public class MusicPlayer extends BasicPlayer {
       return;
     }
     Stream currentStreamRequest = this.addon.configuration().selectedStream();
-    List<Stream> streams1 = Arrays.stream(streams).filter(stream -> stream.id == this.addon.configuration().selectedStream().id).toList();
-    if(streams1.isEmpty())
-      return;
-    if(currentStreamRequest.song == null || currentStreamRequest.song.artist == null || currentStreamRequest.song.title == null)
-      return;
-    if (currentStreamRequest.song.artist.equalsIgnoreCase(streams1.get(0).song.artist)
-        && currentStreamRequest.song.title.equalsIgnoreCase(streams1.get(0).song.title)) {
+    List<Stream> streams1 = Arrays.stream(streams)
+        .filter(stream -> stream.id == this.addon.configuration().selectedStream().id).toList();
+    if (streams1.isEmpty()) {
       return;
     }
-    this.addon.configuration().setSelectedStream(streams1.get(0));
-    this.addon.labyAPI().eventBus().fire(new StreamChangeTrackEvent(streams1.get(0)));
+    if (currentStreamRequest.song == null || currentStreamRequest.song.artist == null
+        || currentStreamRequest.song.title == null) {
+      return;
+    }
+    if (currentStreamRequest.song.artist.equalsIgnoreCase(streams1.getFirst().song.artist)
+        && currentStreamRequest.song.title.equalsIgnoreCase(streams1.getFirst().song.title)) {
+      return;
+    }
+    this.addon.configuration().setSelectedStream(streams1.getFirst());
+    this.addon.labyAPI().eventBus().fire(new StreamChangeTrackEvent(streams1.getFirst()));
   }
 
   public void play() {
@@ -97,7 +101,8 @@ public class MusicPlayer extends BasicPlayer {
     try {
       super.setGain(volume);
     } catch (BasicPlayerException e) {
-      logger.warn("Failed to set the volume", e);
+      logger.warn("Failed to set the volume");
+      logger.debug("", e);
     }
   }
 
@@ -128,7 +133,6 @@ public class MusicPlayer extends BasicPlayer {
       URL url = new URL(stream.url);
       URLConnection connection = url.openConnection();
       connection.setRequestProperty("User-Agent", "RadioReg/Labymod");
-      connection.setConnectTimeout(1000);
 
       queue.offer(() -> {
         try {
@@ -142,12 +146,15 @@ public class MusicPlayer extends BasicPlayer {
                       Component.text(stream.name)))
           );
           this.updateCurrentStream();
+          addon.stationsActivity.updateStations();
         } catch (BasicPlayerException | IOException e) {
           logger.error("Failed to play the stream", e);
+          logger.debug("", e);
         }
       });
     } catch (Exception e) {
-      logger.error("Failed to open the stream", e);
+      logger.error("Failed to open the stream");
+      logger.debug("", e);
     }
 
   }
@@ -157,7 +164,8 @@ public class MusicPlayer extends BasicPlayer {
       try {
         super.stop();
       } catch (BasicPlayerException e) {
-        logger.error("Failed to stop the player", e);
+        logger.error("Failed to stop the player");
+        logger.debug("", e);
       }
     });
   }
@@ -172,7 +180,8 @@ public class MusicPlayer extends BasicPlayer {
           super.pause();
         }
       } catch (BasicPlayerException e) {
-        logger.error("Failed to toggle the player", e);
+        logger.error("Failed to toggle the player");
+        logger.debug("", e);
       }
     });
   }
@@ -182,7 +191,8 @@ public class MusicPlayer extends BasicPlayer {
       try {
         super.stop();
       } catch (BasicPlayerException e) {
-        logger.error("Failed to stop the player", e);
+        logger.error("Failed to stop the player");
+        logger.debug("", e);
       }
     });
   }

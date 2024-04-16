@@ -120,12 +120,12 @@ public class IngameWidget extends FlexibleContentWidget implements Updatable {
   }
 
   private void updateTrack(Stream stream) {
-    if(stream.song.title == null || stream.song.artist == null || stream.song.cover == null || this.artistWidget == null
+    if(stream.song == null || stream.song.cover == null || this.artistWidget == null
         || this.trackWidget == null) {
       return;
     }
-    this.trackWidget.setComponent(Component.text(stream.song.title));
-    this.artistWidget.setComponent(Component.text(stream.song.artist));
+    this.trackWidget.setComponent(Component.text(stream.song.title == null ? "No Title" : stream.song.title));
+    this.artistWidget.setComponent(Component.text(stream.song.artist == null ? "No Artist" : stream.song.artist));
     this.stationWidget.setComponent(Component.text(stream.name));
 
     this.coverWidget.icon().set(Icon.url(stream.song.cover));

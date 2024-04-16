@@ -2,7 +2,7 @@ package de.optischa.radioPlayer.hudwidgets;
 
 import de.optischa.radioPlayer.Main;
 import de.optischa.radioPlayer.event.StreamChangeTrackEvent;
-import de.optischa.radioPlayer.hudwidgets.RadioPlayerHudWidget.SpotifyHudWidgetConfig;
+import de.optischa.radioPlayer.hudwidgets.RadioPlayerHudWidget.RadioRegHudWidgetConfig;
 import de.optischa.radioPlayer.widget.IngameWidget;
 import net.labymod.api.client.gui.hud.hudwidget.HudWidgetConfig;
 import net.labymod.api.client.gui.hud.hudwidget.widget.WidgetHudWidget;
@@ -18,7 +18,7 @@ import net.labymod.api.util.ThreadSafe;
 import net.labymod.api.util.bounds.area.RectangleAreaPosition;
 
 @Link("ingame-widget.lss")
-public class RadioPlayerHudWidget extends WidgetHudWidget<SpotifyHudWidgetConfig> {
+public class RadioPlayerHudWidget extends WidgetHudWidget<RadioRegHudWidgetConfig> {
   public static final String TRACK_CHANGE_REASON = "track_change";
   public static final String COVER_VISIBILITY_REASON = "cover_visibility";
   public static final String CHANGE_STATION_SHOWING_REASON = "station_visibility";
@@ -26,14 +26,14 @@ public class RadioPlayerHudWidget extends WidgetHudWidget<SpotifyHudWidgetConfig
   private final Main addon;
 
   public RadioPlayerHudWidget(String id) {
-    super(id, SpotifyHudWidgetConfig.class);
+    super(id, RadioRegHudWidgetConfig.class);
     this.addon = Main.get();
 
     setIcon(Icon.texture(ResourceLocation.create("radioreg", "textures/icon.png")));
   }
 
   @Override
-  public void initializePreConfigured(SpotifyHudWidgetConfig config) {
+  public void initializePreConfigured(RadioRegHudWidgetConfig config) {
     super.initializePreConfigured(config);
 
     config.setEnabled(false);
@@ -52,32 +52,26 @@ public class RadioPlayerHudWidget extends WidgetHudWidget<SpotifyHudWidgetConfig
     widget.addChild(ingameWidget);
     widget.addId("radio");
 
-    this.config.backgroundColor().addChangeListener((property, prevValue, newValue) -> {
-      ThreadSafe.executeOnRenderThread(() -> {
-        if (!this.isEnabled()) {
-          return;
-        }
-        ingameWidget.backgroundColor().set(newValue);
-      });
-    });
+    this.config.backgroundColor().addChangeListener((property, prevValue, newValue) -> ThreadSafe.executeOnRenderThread(() -> {
+      if (!this.isEnabled()) {
+        return;
+      }
+      ingameWidget.backgroundColor().set(newValue);
+    }));
 
-    this.config.showCover().addChangeListener((property, prevValue, newValue) -> {
-      ThreadSafe.executeOnRenderThread(() -> {
-        if (!this.isEnabled()) {
-          return;
-        }
-        this.requestUpdate(COVER_VISIBILITY_REASON);
-      });
-    });
+    this.config.showCover().addChangeListener((property, prevValue, newValue) -> ThreadSafe.executeOnRenderThread(() -> {
+      if (!this.isEnabled()) {
+        return;
+      }
+      this.requestUpdate(COVER_VISIBILITY_REASON);
+    }));
 
-    this.config.showStation().addChangeListener((property, prevValue, newValue) -> {
-      ThreadSafe.executeOnRenderThread(() -> {
-        if (!this.isEnabled()) {
-          return;
-        }
-        this.requestUpdate(CHANGE_STATION_SHOWING_REASON);
-      });
-    });
+    this.config.showStation().addChangeListener((property, prevValue, newValue) -> ThreadSafe.executeOnRenderThread(() -> {
+      if (!this.isEnabled()) {
+        return;
+      }
+      this.requestUpdate(CHANGE_STATION_SHOWING_REASON);
+    }));
   }
 
   @Subscribe
@@ -96,7 +90,7 @@ public class RadioPlayerHudWidget extends WidgetHudWidget<SpotifyHudWidgetConfig
     return this.addon.musicPlayer.isPlaying();
   }
 
-  public static class SpotifyHudWidgetConfig extends HudWidgetConfig {
+  public static class RadioRegHudWidgetConfig extends HudWidgetConfig {
     @SwitchSetting
     private final ConfigProperty<Boolean> showCover = ConfigProperty.create(true);
 
