@@ -19,6 +19,7 @@ dependencies {
     maven(mavenCentral(), "com.squareup.okhttp3:okhttp:4.12.0")
     maven(mavenCentral(), "com.squareup.okio:okio:3.9.0")
     maven(mavenCentral(), "com.squareup.okio:okio-jvm:3.9.0")
+    maven(mavenCentral(), "javazoom:jlayer:1.0.1")
 }
 
 labyModProcessor {

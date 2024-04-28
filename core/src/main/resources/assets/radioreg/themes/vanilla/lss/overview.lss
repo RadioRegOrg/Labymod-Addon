@@ -1,90 +1,149 @@
-.stations-container {
-  width: 100%;
+.container {
+  margin-top: 4;
+  alignment-x: center;
+  orientation: vertical;
+  max-width: 420;
+  width: 90%;
+  max-width: 440;
   height: 100%;
-  left: 0;
+  left: 50%;
   top: 0;
 
-  Scroll {
-    width: 90%;
-    top: 0;
-    bottom: 0;
-    margin-top: 5;
-    margin-bottom: 5;
-    left: 50%;
-    alignment-x: center;
-
-    .name-tag-list {
-      left: 0;
-      top: 0;
-      height: fit-content;
-      space-between-entries: 2;
-      selectable: true;
-    }
-
-    Scrollbar {
-      left: 0;
-      top: 0;
-      width: 5;
-      height: 100%;
-      margin-left: 5;
-    }
-  }
-}
-
-.stations-list {
-  space-between-entries: 4;
-}
-
-Station {
-  border-radius: 5;
-  border-thickness: 0;
-  height: 30;
-
-  .background-cover {
-    top: 0;
-    left: 0;
-    opacity: 0.325;
+  .header {
+    use-floating-point-position: true;
+    height: 16;
     width: 100%;
-    border-thickness: 0;
-    height: 30;
-    object-fit: cover;
-  }
+    space-between-entries: 2;
+    orientation: horizontal;
+    margin-bottom: 5;
+    margin-left: 10;
+    margin-right: 10;
 
-  .avatar {
-    width: 26;
-    height: 26;
-    border-thickness: 0;
-    top: 2;
-    left: 2;
-  }
+    .search-widget {
+      width: 100%;
+      height: 18;
+      clear-button: true;
 
-  .name {
-    left: 30;
-    top: 2;
-  }
-
-  .song {
-    left: 30;
-    top: 13;
-  }
-
-  &.disabled {
-    .avatar {
-      opacity: 0.5;
-    }
-
-    .name {
-      opacity: 0.5;
-    }
-
-    .custom-name {
-      opacity: 0.5;
     }
   }
 }
 
-.selected {
+.error {
+  left: 50%;
+  top: 75;
+  alignment-x: center;
+  font-size: medium;
+  text-color: red;
+}
+
+.scroll {
+  left: 0;
+  right: 0;
+  top: 0;
+  top: 0;
   padding: 0;
-  border: 1 gray;
-  background-color: black;
+  bottom: 0;
+  scroll-speed: 60;
+  modify-content-width: false;
+  margin-left: 10;
+  padding-bottom: 5;
+
+  Scrollbar {
+    width: 5;
+    margin-left: 5;
+  }
 }
+
+  TilesGrid {
+    use-floating-point-position: true;
+    width: 100%;
+    margin: 5 0;
+    height: fit-content;
+    tile-height: 55;
+    space-between-entries: 5;
+    tiles-per-line: 2;
+
+  Station {
+    border-color: rgba(255,255,255,50);
+    border-thickness: 0;
+    background-color-transition-duration: 150;
+    renderer: Background;
+    width: 175;
+    height: 52;
+    stencil: true;
+    use-floating-point-position: true;
+
+    &:active {
+      padding: 2;
+      border-color: var(--button-color-border);
+      border-thickness: 1.5;
+      background-color: var(--button-color);
+    }
+
+    .play-button, .pause-button {
+      width: 15;
+      height: 15;
+      background-color: #1e2129;
+      padding: 1;
+      cursor: pointer;
+      top: 32;
+      left: 1;
+    }
+
+    .item-container {
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      width: 100%;
+      height: fit-content;
+      orientation: horizontal;
+
+      .avatar {
+        margin-top: 1;
+        width: 50;
+        height: 50;
+      }
+
+      .item-text-container {
+        height: 57;
+        margin-left: 2;
+        margin-top: 1;
+        width: 100%;
+        top: 0;
+        left: 0;
+
+        .name {
+          font-size: 1;
+          font-weight: 500;
+          max-width: 100%;
+          use-floating-point-position: true;
+          margin-top: 3;
+          max-lines: 1;
+        }
+
+        .organization {
+          text-color: gold;
+          font-size: 0.7;
+          margin-bottom: 7;
+        }
+
+        .title {
+          font-size: 0.95;
+          font-weight: 400;
+          max-width: 175;
+          use-floating-point-position: true;
+          max-lines: 1;
+        }
+
+        .artist {
+           use-floating-point-position: true;
+          font-style: italic;
+          max-width: 100%;
+          font-size: 0.8;
+          max-lines: 1;
+        }
+      }
+      }
+    }
+  }

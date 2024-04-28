@@ -10,13 +10,13 @@ version = "1.0.0"
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 
 labyMod {
-    defaultPackageName = "de.optischa.radioPlayer"
+    defaultPackageName = "net.radioreg.radioPlayer"
     addonInfo {
         namespace = "radioreg"
-        displayName = "Radio Player"
+        displayName = "RadioReg"
         author = "RadioReg"
         version = System.getenv().getOrDefault("VERSION", "1.0.0")
-        description = "Play Radio in Minecraft with LabyMod"
+        description = "Listen to your favorite web radios in Labymod with many setting options"
     }
 
     minecraft {

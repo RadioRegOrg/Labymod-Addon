@@ -139,7 +139,7 @@
         .title {
           font-size: 0.95;
           font-weight: 400;
-          max-width: 100%;
+          max-width: 175;
           use-floating-point-position: true;
           max-lines: 1;
         }

@@ -94,7 +94,6 @@ Scroll {
     right: 0;
     bottom: 0;
     border-radius: 5 5 0 0;
-
     object-fit: cover;
     icon-width: 100%;
   }
@@ -102,7 +101,6 @@ Scroll {
   Gradient {
     top: 0;
     left: 0;
-
     direction: vertical-top-bottom;
     color-start: rgba(0, 0, 0, 110);
     color-end: rgba(0, 0, 0, 225);
@@ -124,4 +122,84 @@ Scroll {
     icon-width: 58;
     icon-height: 58;
   }
+
+    .info-container {
+      left: 85;
+      bottom: 15;
+      height: 54;
+      right: 40;
+      fit-outer: true;
+      overwrite-width: false;
+      space-between-entries: 0;
+      padding: 5 0 5 5;
+
+      .author {
+        font-size: 0.7;
+        padding-top: 1;
+        padding-bottom: 1;
+        text-color: rgb(255, 138, 36);
+        font-weight: 400;
+      }
+
+      .name {
+        font-size: 1.4;
+        font-weight: 400;
+        padding-bottom: 2;
+      }
+
+      .short-description {
+        font-size: 0.8;
+        font-weight: 150;
+        text-color: rgb(240, 240, 240);
+        width: 100%;
+        line-spacing: 2;
+        padding-bottom: 2;
+        max-lines: 4;
+      }
+
+      .links-container {
+        top: 0;
+        left: 0;
+        margin-top: 5;
+        width: fit-content;
+        height: fit-content;
+
+        OrganizationLink {
+          width: fit-content;
+          height: fit-content;
+          padding: 0 5;
+
+          .content-widget {
+            width: fit-content;
+            height: fit-content;
+            orientation: horizontal;
+            alignment-x: center;
+
+            Icon {
+              height: 10;
+              width: 10;
+            }
+
+            .name {
+              font-size: 1;
+              font-weight: 100;
+              padding-bottom: 2;
+              text-color: rgb(35, 187, 255);
+
+              &:hover {
+                text-color: rgb(99, 203, 255);
+              }
+            }
+          }
+        }
+      }
+    }
+}
+
+OrganizationStream {
+  height: fit-content;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
 }

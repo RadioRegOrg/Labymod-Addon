@@ -1,0 +1,170 @@
+Button {
+  filter: blur(0);
+}
+
+.scroll-container {
+  write-to-stencil-buffer: true;
+  background-color: rgba(0, 0, 0, 255);
+  border-radius: 5 5 5 0;
+}
+
+.top-container {
+  margin-top: -0.2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 15.5;
+//border-radius: 0 7.5 0 0;
+//filter: blur(var(--addon-profile-blur-radius));
+//background-color: var(--addon-profile-scroll-color);
+  padding: 12;
+  margin-left: 10;
+  margin-right: 10;
+
+  Button {
+    top: 0;
+    left: 0;
+    height: 20;
+    width: fit-content;
+    padding: 0 4 0 4;
+    filter: blur(0);
+
+    Component {
+      font-size: medium;
+      font-weight: 300;
+      alignment-x: center;
+    }
+
+    Icon {
+      width: 16;
+      height: 16;
+    }
+  }
+
+  .back-button {
+    width: 12;
+    border-thickness: 1;
+    border-softness: 0.25;
+    border-color: rgba(255, 255, 255, 180);
+
+    Icon {
+      width: 8;
+      height: 8;
+    }
+
+    Component {
+      margin-top: 1;
+    }
+  }
+}
+
+.scroll-container {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  margin-left: 10;
+}
+
+Scroll {
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  scroll-speed: 50;
+  modify-content-width: false;
+
+  Scrollbar {
+    use-lss-position: true;
+    top: 0;
+    right: 0;
+    width: 5;
+    bottom: 0;
+    margin-left: 5;
+  }
+}
+
+.container {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: fit-content;
+  space-between-entries: 0;
+}
+
+.details-with-thumbnail {
+  height: 120;
+  padding-top: -0.1;
+
+  .thumbnail {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    icon-width: 100%;
+  }
+
+  Gradient {
+    color-start: rgba(0, 0, 0, 100);
+  }
+}
+
+.details-container {
+  left: 0;
+  top: 0;
+  width: 100%;
+
+  .icon {
+    left: 15;
+    bottom: 15;
+    height: 64;
+    width: 64;
+
+    icon-width: 64;
+    icon-height: 64;
+  }
+
+  .info-container {
+    left: 85;
+    bottom: 15;
+    height: 60;
+    right: 20;
+    fit-outer: true;
+    overwrite-width: false;
+    space-between-entries: 2;
+    padding: 2 0 2 2;
+
+    .author {
+      left: 0;
+      top: 0;
+      font-size: small;
+      text-color: rgb(255, 138, 36);
+      font-weight: 400;
+    }
+
+    .name {
+      left: 0;
+      top: 0;
+      font-size: large;
+      font-weight: 400;
+    }
+
+    .short-description {
+      left: 0;
+      top: 0;
+      text-color: gray;
+      width: 100%;
+      max-lines: 5;
+    }
+  }
+}
+
+OrganizationStream {
+  height: fit-content;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+}
