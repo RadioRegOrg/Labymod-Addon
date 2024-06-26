@@ -37,7 +37,7 @@ public class Configuration extends AddonConfig {
       });
 
   @SliderSetting(max = 100, min = 0, steps = 1)
-  private ConfigProperty<Integer> volumeSlider = new ConfigProperty<>(25).addChangeListener(
+  private ConfigProperty<Integer> volumeSlider = new ConfigProperty<>(10).addChangeListener(
       (property, prevValue, newValue) -> {
         Main main = Main.get();
         if(main == null) {
@@ -47,7 +47,7 @@ public class Configuration extends AddonConfig {
         if (musicPlayer == null) {
           return;
         }
-        Main.get().musicPlayer.setVolume((float) newValue / 100);
+        Main.get().musicPlayer.setVolume(newValue);
       });
 
   @KeyBindSetting()

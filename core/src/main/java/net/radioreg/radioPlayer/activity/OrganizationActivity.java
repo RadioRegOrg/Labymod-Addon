@@ -23,6 +23,7 @@ import net.labymod.api.client.gui.screen.widget.widgets.layout.list.HorizontalLi
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.VerticalListWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.renderer.IconWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.renderer.VariableIconWidget;
+import java.util.Arrays;
 
 @AutoActivity()
 @Link("organization.lss")
@@ -37,16 +38,16 @@ public class OrganizationActivity extends Activity {
     this.fallback = fallback;
     this.organization = organization;
 
-    this.organizationStreamWidget = new OrganizationStreamWidget(organization.streams);
+    this.organizationStreamWidget = new OrganizationStreamWidget(Arrays.stream(organization.streams).filter(stream -> stream.organization.id == organization.id).toList());
   }
 
   public void onOpenScreen() {
-    ((Document) this.document).playAnimation("fade-in");
+    this.document.playAnimation("fade-in");
     super.onOpenScreen();
   }
 
   public void onCloseScreen() {
-    ((Document) this.document).playAnimation("fade-out");
+    this.document.playAnimation("fade-out");
     super.onCloseScreen();
   }
 
@@ -106,11 +107,9 @@ public class OrganizationActivity extends Activity {
     DivWidget scrollContainerWidget = (new DivWidget()).addId("scroll-container");
     scrollContainerWidget.addChild(scrollWidget);
     this.document().addChild(scrollContainerWidget);
-    ButtonWidget backButton = ButtonWidget.icon(SpriteCommon.BACK_BUTTON, () -> {
-      this.fallback.displayScreen(this.fallback);
-    });
+    ButtonWidget backButton = ButtonWidget.icon(SpriteCommon.BACK_BUTTON, () -> this.fallback.displayScreen(this.fallback));
     backButton.addId("back-button");
-    DivWidget topContainer = (DivWidget)(new DivWidget()).addId("top-container");
+    DivWidget topContainer = (new DivWidget()).addId("top-container");
     topContainer.addChild(backButton);
 
 

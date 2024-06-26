@@ -30,7 +30,7 @@ public class HotkeyListener {
     } else if (config.playKey().get() != Key.NONE && config.toggleKey().get() == event.key()) {
       this.addon.musicPlayer.toggle();
     } else if (config.playKey().get() != Key.NONE && config.pauseKey().get() == event.key()) {
-      this.addon.musicPlayer.pause();
+      this.addon.musicPlayer.stop();
     }
   }
 

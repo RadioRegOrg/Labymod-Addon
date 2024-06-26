@@ -18,6 +18,8 @@ import io.socket.client.Socket;
 import io.socket.emitter.Emitter.Listener;
 import java.net.URISyntaxException;
 import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
 import net.labymod.api.Laby;
 import net.labymod.api.util.logging.Logging;
 
@@ -25,6 +27,7 @@ public class Websocket {
 
   private final Logging logger;
   private Socket socket;
+  private Timer checkTimer;
 
   public Websocket(Logging logger, String serverUrl) {
     this.logger = logger;
@@ -97,5 +100,27 @@ public class Websocket {
 
   public void removeEventListener(String event) {
     this.socket.off(event);
+  }
+
+  public void startCheckTimer() {
+    if (checkTimer == null) {
+      checkTimer = new Timer();
+      checkTimer.scheduleAtFixedRate(new TimerTask() {
+        @Override
+        public void run() {
+          System.out.println("eee");
+          if (Main.get().musicPlayer.isPlaying()) {
+            sendMessage("check_stream_status", Integer.toString(Main.get().musicPlayer.getCurrentStream().id));
+          }
+        }
+      }, 0, 60000); // Check every minute (60000 milliseconds)
+    }
+  }
+
+  public void stopCheckTimer() {
+    if (checkTimer != null) {
+      checkTimer.cancel();
+      checkTimer = null;
+    }
   }
 }
